@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import { connectToDatabase } from "./db";
 
 dotenv.config()
 
@@ -24,6 +25,13 @@ app.use(express.json());
 /**
  * Server Activation
  */
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
-});
+connectToDatabase()
+    .then(() => {
+        app.listen(PORT, () => {
+            console.log(`Listening on port ${PORT}`);
+        });
+    })
+    .catch((error: Error) => {
+        console.error("Database connection failed", error);
+        process.exit();
+    });
