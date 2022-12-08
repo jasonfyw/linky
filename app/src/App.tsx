@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import LinkGenerator from "./components/LinkGenerator"
 import LinkDisplay from "./components/LinkDisplay";
+import Intro from "./components/Intro";
 
 const baseURL = 'http://localhost:8000'
 
@@ -30,6 +31,7 @@ export const App = () => {
         <ChakraProvider theme={theme}>
             <Center h={'100vh'}>
                 <VStack>
+                    <Intro />
                     <LinkDisplay shortLink={shortLink} />
                     <LinkGenerator generateShortLink={generateShortLink} />
                 </VStack>
