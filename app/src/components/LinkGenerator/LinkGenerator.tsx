@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Button,
-    Center,
     Container,
     Input,
     Stack,
@@ -27,36 +26,34 @@ const LinkGenerator = (props: LinkGeneratorProps) => {
     }
     
     return (
-        <Center h={'100vh'}>
-            <Container>
-                <Formik
-                    initialValues={{
-                        link: '',
-                    }}
-                    validationSchema={ShortenLinkSchema}
-                    onSubmit={values => {
-                        handleSubmit(values);
-                    }}
-                >
-                    {({ errors, touched }) => (
-                        <Form>
-                            <Stack>
-                                <Field
-                                    as={Input}
-                                    name='link'
-                                    variant={'filled'}
-                                    placeholder='example.com'
-                                />
-                                <Button type="submit">
-                                    Shorten
-                                </Button>
-                            </Stack>
-                            {errors.link && touched.link ? <Text color='red.600'>{errors.link}</Text> : <Text>&nbsp;</Text>}
-                        </Form>
-                    )}
-                </Formik>
-            </Container>
-        </Center>
+        <Container w={'md'}>
+            <Formik
+                initialValues={{
+                    link: '',
+                }}
+                validationSchema={ShortenLinkSchema}
+                onSubmit={values => {
+                    handleSubmit(values);
+                }}
+            >
+                {({ errors, touched }) => (
+                    <Form>
+                        <Stack>
+                            <Field
+                                as={Input}
+                                name='link'
+                                variant={'filled'}
+                                placeholder='example.com'
+                            />
+                            <Button type="submit">
+                                Shorten
+                            </Button>
+                        </Stack>
+                        {errors.link && touched.link ? <Text color='red.600'>{errors.link}</Text> : <Text>&nbsp;</Text>}
+                    </Form>
+                )}
+            </Formik>
+        </Container>
     )
 };
 export default LinkGenerator;

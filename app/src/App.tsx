@@ -1,14 +1,18 @@
 import { useState } from "react"
 import {
-  ChakraProvider,
-  theme,
+    Center,
+    ChakraProvider,
+    theme,
+    VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import LinkGenerator from "./components/LinkGenerator"
 import LinkDisplay from "./components/LinkDisplay";
 
+const baseURL = 'http://localhost:8000'
+
 const api = axios.create({
-    baseURL: 'http://localhost:8000'
+    baseURL: baseURL
 })
 
 export const App = () => {
@@ -18,13 +22,18 @@ export const App = () => {
         const res = await api.post('/new', {
             "url": link
         })
-        setShortLink(res.data.alias)
+        const newLink = baseURL.concat('/', res.data.alias)
+        setShortLink(newLink)
     }
 
     return (
         <ChakraProvider theme={theme}>
-            <LinkGenerator generateShortLink={generateShortLink} />
-            <LinkDisplay shortLink={shortLink} />
+            <Center h={'100vh'}>
+                <VStack>
+                    <LinkDisplay shortLink={shortLink} />
+                    <LinkGenerator generateShortLink={generateShortLink} />
+                </VStack>
+            </Center>
         </ChakraProvider>
     )
 }
