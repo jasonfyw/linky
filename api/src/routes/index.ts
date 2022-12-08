@@ -40,7 +40,7 @@ router.post('/new/', async (req: Request, res: Response) => {
             const shortLink = await ShortLink.create(newShortLink)
             res.status(200).send(shortLink)
         } else {
-            res.status(401).send('Invalid URL')
+            res.status(400).send('Invalid URL')
         }
     } catch (error) {
         res.status(500).send(error)
