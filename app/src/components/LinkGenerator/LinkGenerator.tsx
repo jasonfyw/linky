@@ -17,36 +17,46 @@ const ShortenLinkSchema = Yup.object().shape({
     ).required('Please enter a URL'),
 });
 
-const LinkGenerator = () => (
-    <Center h={'100vh'}>
-        <Container>
-            <Formik
-                initialValues={{
-                    link: '',
-                }}
-                validationSchema={ShortenLinkSchema}
-                onSubmit={values => {
-                    console.log(values);
-                }}
-            >
-                {({ errors, touched }) => (
-                    <Form>
-                        <Stack>
-                            <Field
-                                as={Input}
-                                name='link'
-                                variant={'filled'}
-                                placeholder='example.com'
-                            />
-                            <Button type="submit">
-                                Shorten
-                            </Button>
-                        </Stack>
-                        {errors.link && touched.link ? <Text color='red.600'>{errors.link}</Text> : <Text>&nbsp;</Text>}
-                    </Form>
-                )}
-            </Formik>
-        </Container>
-    </Center>
-);
+interface LinkGeneratorProps {
+    generateShortLink: (link: string) => void
+}
+
+const LinkGenerator = (props: LinkGeneratorProps) => {
+    const handleSubmit = (values: { link: string }) => {
+        props.generateShortLink(values.link)
+    }
+    
+    return (
+        <Center h={'100vh'}>
+            <Container>
+                <Formik
+                    initialValues={{
+                        link: '',
+                    }}
+                    validationSchema={ShortenLinkSchema}
+                    onSubmit={values => {
+                        handleSubmit(values);
+                    }}
+                >
+                    {({ errors, touched }) => (
+                        <Form>
+                            <Stack>
+                                <Field
+                                    as={Input}
+                                    name='link'
+                                    variant={'filled'}
+                                    placeholder='example.com'
+                                />
+                                <Button type="submit">
+                                    Shorten
+                                </Button>
+                            </Stack>
+                            {errors.link && touched.link ? <Text color='red.600'>{errors.link}</Text> : <Text>&nbsp;</Text>}
+                        </Form>
+                    )}
+                </Formik>
+            </Container>
+        </Center>
+    )
+};
 export default LinkGenerator;
