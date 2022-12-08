@@ -4,6 +4,7 @@ import {
     Center,
     Container,
     Input,
+    Stack,
     Text
 } from '@chakra-ui/react';
 import { Formik, Form, Field } from 'formik';
@@ -30,9 +31,18 @@ const LinkGenerator = () => (
             >
                 {({ errors, touched }) => (
                     <Form>
-                        <Field as={Input} name="link" />
-                        {errors.link && touched.link ? <Text color='red.600'>{errors.link}</Text> : null}
-                        <Button type="submit">Shorten</Button>
+                        <Stack>
+                            <Field
+                                as={Input}
+                                name='link'
+                                variant={'filled'}
+                                placeholder='example.com'
+                            />
+                            <Button type="submit">
+                                Shorten
+                            </Button>
+                        </Stack>
+                        {errors.link && touched.link ? <Text color='red.600'>{errors.link}</Text> : <Text>&nbsp;</Text>}
                     </Form>
                 )}
             </Formik>
