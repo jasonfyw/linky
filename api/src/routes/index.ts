@@ -4,6 +4,10 @@ import { ShortLink } from '../models/ShortLink';
 
 const router = Router()
 
+const isValidUrl = (s: string) => {
+    try { return Boolean(new URL(s)) } catch (e) { return false }
+}
+
 const generator = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 10)
 
 /**
@@ -29,8 +33,9 @@ router.get('/:id', async (req: Request, res: Response) => {
  */
 router.post('/new/', async (req: Request, res: Response) => {
     let { url } = req.body
-    const isValidUrl = (s: string) => {
-        try { return Boolean(new URL(s)) } catch (e) { return false }
+
+    if (!url.match(/^(https ?): \/\//)) {
+        url = 'http://'.concat(url)
     }
 
     try {
