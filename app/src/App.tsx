@@ -3,9 +3,11 @@ import {
   ChakraProvider,
   theme,
 } from "@chakra-ui/react"
+import LinkGenerator from "./components/LinkGenerator"
 
 export const App = () => (
-  <ChakraProvider theme={theme}>
-    
-  </ChakraProvider>
+    <ChakraProvider theme={theme}>
+        <LinkGenerator />
+    </ChakraProvider>
 )
+    
