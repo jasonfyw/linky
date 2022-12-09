@@ -6,7 +6,7 @@ import {
     VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
-import LinkGenerator from "./components/LinkGenerator"
+import LinkGenerator from "./components/LinkGeneratorForm"
 import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
 
