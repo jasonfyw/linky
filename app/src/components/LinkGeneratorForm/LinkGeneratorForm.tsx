@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Button,
-    Container,
+    Box,
     Input,
     Stack,
     Text
@@ -16,17 +16,17 @@ const ShortenLinkSchema = Yup.object().shape({
     ).required('Please enter a URL'),
 });
 
-interface LinkGeneratorProps {
+interface LinkGeneratorFormProps {
     generateShortLink: (link: string) => void
 }
 
-const LinkGenerator = (props: LinkGeneratorProps) => {
+const LinkGeneratorForm = (props: LinkGeneratorFormProps) => {
     const handleSubmit = (values: { link: string }) => {
         props.generateShortLink(values.link)
     }
     
     return (
-        <Container w={'md'}>
+        <Box minW={['xs', 'xl']}>
             <Formik
                 initialValues={{
                     link: '',
@@ -53,7 +53,7 @@ const LinkGenerator = (props: LinkGeneratorProps) => {
                     </Form>
                 )}
             </Formik>
-        </Container>
+        </Box>
     )
 };
-export default LinkGenerator;
+export default LinkGeneratorForm;
