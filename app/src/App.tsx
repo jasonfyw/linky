@@ -29,7 +29,7 @@ export const App = () => {
 
     return (
         <ChakraProvider theme={theme}>
-            <Center h={'100vh'}>
+            <Center my={20}>
                 <VStack>
                     <Intro />
                     <LinkDisplay shortLink={shortLink} />
