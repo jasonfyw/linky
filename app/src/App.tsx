@@ -17,14 +17,14 @@ const api = axios.create({
 })
 
 export const App = () => {
-    const [shortLink, setShortLink] = useState<string>('')
+    const [links, setLinks] = useState<string[][]>([])
 
     const generateShortLink = async (link: string) => {
         const res = await api.post('/new', {
             "url": link
         })
-        const newLink = baseURL.concat('/', res.data.alias)
-        setShortLink(newLink)
+        const shortLink = baseURL.concat('/', res.data.alias)
+        setLinks([...links, [shortLink, link]])
     }
 
     return (
@@ -32,7 +32,7 @@ export const App = () => {
             <Center my={20}>
                 <VStack>
                     <Intro />
-                    <LinkDisplay shortLink={shortLink} />
+                    <LinkDisplay links={links} />
                     <LinkGenerator generateShortLink={generateShortLink} />
                 </VStack>
             </Center>

@@ -1,17 +1,28 @@
 import React from 'react';
 import {
     Container,
-    Text
+    Stack
 } from '@chakra-ui/react';
+import LinkCard from './LinkCard';
+import { includeHTTP } from '../../helpers/links.helpers';
 
 interface LinkDisplayProps {
-    shortLink: string
+    links: string[][]
 }
 
 const LinkDisplay = (props: LinkDisplayProps) => {
     return (
         <Container>
-            <Text>{ props.shortLink }</Text>
+            <Stack>
+                {
+                    props.links.map(alias => (
+                        <LinkCard
+                            link={includeHTTP(alias[1])}
+                            shortLink={includeHTTP(alias[0])}
+                        />
+                    ))
+                }
+            </Stack>
         </Container>
     );
 }
