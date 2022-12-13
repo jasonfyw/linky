@@ -34,7 +34,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 router.post('/new/', async (req: Request, res: Response) => {
     let { url } = req.body
 
-    if (!url.match(/^(https ?): \/\//)) {
+    if (!url.match(/^https?:\/\//)) {
         url = 'http://'.concat(url)
     }
 
