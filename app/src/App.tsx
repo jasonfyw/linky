@@ -2,7 +2,6 @@ import { useState } from "react"
 import {
     Center,
     ChakraProvider,
-    Divider,
     theme,
     VStack,
 } from "@chakra-ui/react";
