@@ -16,10 +16,10 @@ interface LinkCardProps {
 const LinkCard = (props: LinkCardProps) => {
     return (
         <Card>
-            <CardHeader>
-                <Heading><Link href={props.shortLink}>{ props.shortLink }</Link></Heading>
+            <CardHeader pb={0} pt={4}>
+                <Heading size={'md'}><Link href={props.shortLink}>{ props.shortLink }</Link></Heading>
             </CardHeader>
-            <CardBody>
+            <CardBody pt={2} pb={3}>
                 <Text><Link href={props.link}>{ props.link }</Link></Text>
             </CardBody>
         </Card>
