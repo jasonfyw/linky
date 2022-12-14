@@ -3,9 +3,12 @@ import {
     Center,
     ChakraProvider,
     theme,
+    useToast,
     VStack,
+    Link
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useCopyToClipboard } from "usehooks-ts";
 import LinkGenerator from "./components/LinkGeneratorForm"
 import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
@@ -17,14 +20,38 @@ const api = axios.create({
 })
 
 export const App = () => {
+    const [value, copy] = useCopyToClipboard()
     const [links, setLinks] = useState<string[][]>([])
+    const toast = useToast()
 
     const generateShortLink = async (link: string) => {
-        const res = await api.post('/new', {
-            "url": link
-        })
-        const shortLink = baseURL.concat('/', res.data.alias)
-        setLinks([...links, [shortLink, link]])
+        try {
+            const res = await api.post('/new', {
+                "url": link
+            })
+            const shortLink = baseURL.concat('/', res.data.alias)
+            copy(shortLink)
+
+            setLinks([...links, [shortLink, link]])
+            toast({
+                title: 'Shortened link copied to clipboard!',
+                description: <Link href={shortLink}>{ shortLink }</Link>,
+                status: 'success',
+                duration: 9000,
+                isClosable: true,
+            })
+        } catch (e) {
+            let message
+            if (e instanceof Error) message = e.message
+            else message = String(e)
+            toast({
+                title: 'An error occurred. Please try again',
+                description: message,
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            })
+        }
     }
 
     return (
