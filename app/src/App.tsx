@@ -20,7 +20,7 @@ const api = axios.create({
 })
 
 export const App = () => {
-    const [value, copy] = useCopyToClipboard()
+    const [, copy] = useCopyToClipboard()
     const [links, setLinks] = useState<string[][]>([])
     const toast = useToast()
 
