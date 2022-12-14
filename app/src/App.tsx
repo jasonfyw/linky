@@ -2,6 +2,7 @@ import { useState } from "react"
 import {
     Center,
     ChakraProvider,
+    Divider,
     theme,
     VStack,
 } from "@chakra-ui/react";
@@ -32,8 +33,8 @@ export const App = () => {
             <Center my={20}>
                 <VStack>
                     <Intro />
-                    <LinkDisplay links={links} />
                     <LinkGenerator generateShortLink={generateShortLink} />
+                    <LinkDisplay links={links} />
                 </VStack>
             </Center>
         </ChakraProvider>

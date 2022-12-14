@@ -12,7 +12,7 @@ interface LinkDisplayProps {
 
 const LinkDisplay = (props: LinkDisplayProps) => {
     return (
-        <Container>
+        <Container my={15}>
             <Stack>
                 {
                     props.links.map(alias => (
