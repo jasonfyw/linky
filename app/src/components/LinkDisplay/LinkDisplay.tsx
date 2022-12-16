@@ -5,9 +5,10 @@ import {
 } from '@chakra-ui/react';
 import LinkCard from './LinkCard';
 import { includeHTTP } from '../../helpers/links.helpers';
+import { ILinkPair } from '../../types';
 
 interface LinkDisplayProps {
-    links: string[][]
+    links: Record<number, ILinkPair>
 }
 
 const LinkDisplay = (props: LinkDisplayProps) => {
@@ -15,10 +16,11 @@ const LinkDisplay = (props: LinkDisplayProps) => {
         <Container my={15}>
             <Stack>
                 {
-                    props.links.map(alias => (
+                    Object.entries(props.links).map(([k, v]) => (
                         <LinkCard
-                            link={includeHTTP(alias[1])}
-                            shortLink={includeHTTP(alias[0])}
+                            key={k}
+                            link={includeHTTP(v.link)}
+                            shortLink={includeHTTP(v.shortLink)}
                         />
                     ))
                 }

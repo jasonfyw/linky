@@ -11,6 +11,7 @@ import { useCopyToClipboard, useLocalStorage } from "usehooks-ts";
 import LinkGenerator from "./components/LinkGeneratorForm"
 import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
+import { ILinkPair } from "./types";
 
 const baseURL = 'http://localhost:8000'
 
@@ -18,9 +19,10 @@ const api = axios.create({
     baseURL: baseURL
 })
 
+
 export const App = () => {
     const [, copy] = useCopyToClipboard()
-    const [links, setLinks] = useLocalStorage<string[][]>('links', [])
+    const [links, setLinks] = useLocalStorage<Record<number, ILinkPair>>('links', {})
     const toast = useToast()
 
     /**
@@ -40,7 +42,13 @@ export const App = () => {
             copy(shortLink)
             // append links to state
             // TODO: use local storage to persist across session
-            setLinks([...links, [shortLink, link]])
+            const newLinkPair: ILinkPair = {
+                shortLink: shortLink,
+                link: link
+            }
+            const keys = Object.keys(links).map(k => parseInt(k))
+            const newIndex = keys.length !== 0 ? Math.max(...keys) + 1 : 0
+            setLinks(links => ({...links, ...{[newIndex]: newLinkPair}}))
             // display a success toast with the copied link
             toast({
                 title: 'Shortened link copied to clipboard!',
