@@ -41,7 +41,6 @@ export const App = () => {
             // copy shortened link to clipboard
             copy(shortLink)
             // append links to state
-            // TODO: use local storage to persist across session
             const newLinkPair: ILinkPair = {
                 shortLink: shortLink,
                 link: link
@@ -74,7 +73,13 @@ export const App = () => {
     }
 
     const deleteLink = (v: string) => {
-        console.log(v)
+        if (links.hasOwnProperty(v)) {
+            setLinks(prevLinks => {
+                const links = { ...prevLinks }
+                delete links[parseInt(v)]
+                return links
+            })
+        }
     }
 
     return (
