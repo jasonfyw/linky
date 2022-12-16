@@ -62,11 +62,19 @@ const LinkCard = (props: LinkCardProps) => {
                 <Box>
                     <CardHeader pb={0} pt={2}>
                         <Center>
-                            <Heading size={'md'}><Link href={props.shortLink}>{props.shortLink}</Link></Heading>
+                            <Heading size={'md'}>
+                                <Link href={props.shortLink} isExternal>
+                                    {props.shortLink}
+                                </Link>
+                            </Heading>
                         </Center>
                     </CardHeader>
                     <CardBody pt={2} pb={4}>
-                        <Text><Link href={props.link}>{props.link}</Link></Text>
+                        <Text>
+                            <Link href={props.link} isExternal>
+                                {props.link}
+                            </Link>
+                        </Text>
                     </CardBody>
                 </Box>
                 <Spacer/>
