@@ -9,17 +9,22 @@ import {
     Flex,
     Spacer,
     Center,
-    useToast
+    useToast,
+    Box,
+    Stack,
+    IconButton
 } from '@chakra-ui/react';
 import {
-    CopyIcon
+    CopyIcon, DeleteIcon
 } from '@chakra-ui/icons';
 import React from 'react';
 import { useCopyToClipboard } from 'usehooks-ts';
 
 interface LinkCardProps {
     shortLink: string,
-    link: string
+    link: string,
+    value: string,
+    deleteLink: (v: string) => void
 }
 
 const LinkCard = (props: LinkCardProps) => {
@@ -48,27 +53,44 @@ const LinkCard = (props: LinkCardProps) => {
         }
     }
 
+    const deleteLink = () => {
+        props.deleteLink(props.value)
+    }
+
     return (
         <Card>
-            <CardHeader pb={0} pt={2}>
-                <Flex>
-                    <Center>
-                        <Heading size={'md'}><Link href={props.shortLink}>{props.shortLink}</Link></Heading>
-                    </Center>
-                    <Spacer/>
+            <Flex>
+                <Box>
+                    <CardHeader pb={0} pt={2}>
+                        <Center>
+                            <Heading size={'md'}><Link href={props.shortLink}>{props.shortLink}</Link></Heading>
+                        </Center>
+                    </CardHeader>
+                    <CardBody pt={2} pb={4}>
+                        <Text><Link href={props.link}>{props.link}</Link></Text>
+                    </CardBody>
+                </Box>
+                <Spacer/>
+                <Center mx={4}>
                     <Button
                         colorScheme='cyan'
                         size={'sm'}
-                        leftIcon={<CopyIcon/>}
+                        leftIcon={<CopyIcon />}
                         onClick={copyLink}
                     >
                         Copy
                     </Button>
-                </Flex>
-            </CardHeader>
-            <CardBody pt={2} pb={4}>
-                <Text><Link href={props.link}>{props.link}</Link></Text>
-            </CardBody>
+                    <IconButton
+                        aria-label='Delete link'
+                        color='current'
+                        marginLeft={2}
+                        onClick={deleteLink}
+                        icon={<DeleteIcon />}
+                        size='sm'
+                        fontSize='md'
+                    />
+                </Center>
+            </Flex>
         </Card>
     );
 }

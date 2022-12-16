@@ -8,7 +8,8 @@ import { includeHTTP } from '../../helpers/links.helpers';
 import { ILinkPair } from '../../types';
 
 interface LinkDisplayProps {
-    links: Record<number, ILinkPair>
+    links: Record<number, ILinkPair>,
+    deleteLink: (v: string) => void
 }
 
 const LinkDisplay = (props: LinkDisplayProps) => {
@@ -19,8 +20,10 @@ const LinkDisplay = (props: LinkDisplayProps) => {
                     Object.entries(props.links).map(([k, v]) => (
                         <LinkCard
                             key={k}
+                            value={k}
                             link={includeHTTP(v.link)}
                             shortLink={includeHTTP(v.shortLink)}
+                            deleteLink={props.deleteLink}
                         />
                     ))
                 }

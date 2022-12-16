@@ -73,13 +73,17 @@ export const App = () => {
         }
     }
 
+    const deleteLink = (v: string) => {
+        console.log(v)
+    }
+
     return (
         <ChakraProvider theme={theme}>
             <Center my={20}>
                 <VStack>
                     <Intro />
                     <LinkGenerator generateShortLink={generateShortLink} />
-                    <LinkDisplay links={links} />
+                    <LinkDisplay links={links} deleteLink={deleteLink} />
                 </VStack>
             </Center>
         </ChakraProvider>
