@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
     Center,
     ChakraProvider,
@@ -8,7 +7,7 @@ import {
     Link
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useCopyToClipboard } from "usehooks-ts";
+import { useCopyToClipboard, useLocalStorage } from "usehooks-ts";
 import LinkGenerator from "./components/LinkGeneratorForm"
 import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
@@ -21,7 +20,7 @@ const api = axios.create({
 
 export const App = () => {
     const [, copy] = useCopyToClipboard()
-    const [links, setLinks] = useState<string[][]>([])
+    const [links, setLinks] = useLocalStorage<string[][]>('links', [])
     const toast = useToast()
 
     /**
