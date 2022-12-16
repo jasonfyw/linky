@@ -79,7 +79,23 @@ export const App = () => {
                 delete links[parseInt(v)]
                 return links
             })
+            toast({
+                title: 'Link deleted',
+                status: 'info',
+                duration: 2000,
+                isClosable: true,
+            })
         }
+    }
+
+    const clearHistory = () => {
+        setLinks({})
+        toast({
+            title: 'All links cleared',
+            status: 'info',
+            duration: 2000,
+            isClosable: true,
+        })
     }
 
     return (
@@ -88,7 +104,11 @@ export const App = () => {
                 <VStack>
                     <Intro />
                     <LinkGenerator generateShortLink={generateShortLink} />
-                    <LinkDisplay links={links} deleteLink={deleteLink} />
+                    <LinkDisplay
+                        links={links}
+                        deleteLink={deleteLink}
+                        clearHistory={clearHistory}
+                    />
                 </VStack>
             </Center>
         </ChakraProvider>
