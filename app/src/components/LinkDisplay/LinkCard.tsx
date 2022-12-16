@@ -74,7 +74,3 @@ const LinkCard = (props: LinkCardProps) => {
 }
 
 export default LinkCard;
-
-function toast(arg0: { title: string; description: JSX.Element; status: string; duration: number; isClosable: boolean; }) {
-    throw new Error('Function not implemented.');
-}
