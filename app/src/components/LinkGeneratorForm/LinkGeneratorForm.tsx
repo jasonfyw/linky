@@ -36,8 +36,9 @@ const LinkGeneratorForm = (props: LinkGeneratorFormProps) => {
                     link: '',
                 }}
                 validationSchema={ShortenLinkSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                    handleSubmit(values, setSubmitting);
+                onSubmit={(values, { setSubmitting, resetForm }) => {
+                    handleSubmit(values, setSubmitting)
+                    resetForm()
                 }}
             >
                 {({ errors, touched, isSubmitting }) => (
