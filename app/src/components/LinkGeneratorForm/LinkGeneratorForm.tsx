@@ -21,11 +21,11 @@ interface LinkGeneratorFormProps {
 }
 
 const LinkGeneratorForm = (props: LinkGeneratorFormProps) => {
-    const handleSubmit = (
+    const handleSubmit = async (
         values: { link: string },
         setSubmitting: (b: boolean) => void
     ) => {
-        props.generateShortLink(values.link)
+        await props.generateShortLink(values.link)
         setSubmitting(false)
     }
     
@@ -36,8 +36,8 @@ const LinkGeneratorForm = (props: LinkGeneratorFormProps) => {
                     link: '',
                 }}
                 validationSchema={ShortenLinkSchema}
-                onSubmit={(values, { setSubmitting, resetForm }) => {
-                    handleSubmit(values, setSubmitting)
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    await handleSubmit(values, setSubmitting)
                     resetForm()
                 }}
             >
