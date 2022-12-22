@@ -40,6 +40,8 @@ const LinkCard = (props: LinkCardProps) => {
                 status: 'success',
                 duration: 2000,
                 isClosable: true,
+                variant: 'subtle',
+                position: 'bottom-left'
             })
         } catch (e) {
             // display an error toast
@@ -48,6 +50,8 @@ const LinkCard = (props: LinkCardProps) => {
                 status: 'error',
                 duration: 2000,
                 isClosable: true,
+                variant: 'subtle',
+                position: 'bottom-left'
             })
         }
     }
