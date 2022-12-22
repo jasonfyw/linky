@@ -22,8 +22,8 @@ import { useCopyToClipboard } from 'usehooks-ts';
 interface LinkCardProps {
     shortLink: string,
     link: string,
-    value: string,
-    deleteLink: (v: string) => void
+    value: number,
+    deleteLink: (v: number) => void
 }
 
 const LinkCard = (props: LinkCardProps) => {

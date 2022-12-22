@@ -22,7 +22,7 @@ const api = axios.create({
 
 export const App = () => {
     const [, copy] = useCopyToClipboard()
-    const [links, setLinks] = useLocalStorage<Record<number, ILinkPair>>('links', {})
+    const [links, setLinks] = useLocalStorage<ILinkPair[]>('links', [])
     const toast = useToast()
 
     /**
@@ -40,14 +40,17 @@ export const App = () => {
             const shortLink = baseURL.concat('/', res.data.alias)
             // copy shortened link to clipboard
             copy(shortLink)
+
+            // extract all keys and find the maximum + 1 to use as the new key
+            const keys = links.map(link => link.key)
+            const newKey = keys.length !== 0 ? Math.max(...keys) + 1 : 0
             // append links to state
             const newLinkPair: ILinkPair = {
+                key: newKey,
                 shortLink: shortLink,
                 link: link
             }
-            const keys = Object.keys(links).map(k => parseInt(k))
-            const newIndex = keys.length !== 0 ? Math.max(...keys) + 1 : 0
-            setLinks(links => ({...links, ...{[newIndex]: newLinkPair}}))
+            setLinks(links => ([...links, newLinkPair]))
             // display a success toast with the copied link
             toast({
                 title: 'Shortened link copied to clipboard!',
@@ -76,26 +79,22 @@ export const App = () => {
         }
     }
 
-    const deleteLink = (v: string) => {
-        if (links.hasOwnProperty(v)) {
-            setLinks(prevLinks => {
-                const links = { ...prevLinks }
-                delete links[parseInt(v)]
-                return links
-            })
-            toast({
-                title: 'Link deleted',
-                status: 'info',
-                duration: 2000,
-                isClosable: true,
-                variant: 'subtle',
-                position: 'bottom-left'
-            })
-        }
+    const deleteLink = (v: number) => {
+        setLinks(prevLinks => {
+            return prevLinks.filter(l => l.key !== v)
+        })
+        toast({
+            title: 'Link deleted',
+            status: 'info',
+            duration: 2000,
+            isClosable: true,
+            variant: 'subtle',
+            position: 'bottom-left'
+        })
     }
 
     const clearHistory = () => {
-        setLinks({})
+        setLinks([])
         toast({
             title: 'All links cleared',
             status: 'info',
