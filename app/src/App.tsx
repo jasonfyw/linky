@@ -55,6 +55,8 @@ export const App = () => {
                 status: 'success',
                 duration: 9000,
                 isClosable: true,
+                variant: 'subtle',
+                position: 'bottom-left'
             })
         } catch (e) {
             // catch and extract message from error
@@ -68,6 +70,8 @@ export const App = () => {
                 status: 'error',
                 duration: 9000,
                 isClosable: true,
+                
+                position: 'bottom-left'
             })
         }
     }
@@ -84,6 +88,8 @@ export const App = () => {
                 status: 'info',
                 duration: 2000,
                 isClosable: true,
+                variant: 'subtle',
+                position: 'bottom-left'
             })
         }
     }
@@ -95,6 +101,8 @@ export const App = () => {
             status: 'info',
             duration: 2000,
             isClosable: true,
+            variant: 'subtle',
+            position: 'bottom-left'
         })
     }
 
