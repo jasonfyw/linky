@@ -49,7 +49,7 @@ const LinkGeneratorForm = (props: LinkGeneratorFormProps) => {
                                 name='link'
                                 variant={'filled'}
                                 placeholder='example.com'
-                                spellcheck='false'
+                                spellCheck='false'
                             />
                             <Button type="submit" isLoading={isSubmitting}>
                                 Shorten
