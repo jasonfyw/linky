@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,7 @@
     "express": "^4.18.2",
     "mongodb": "^4.12.1",
     "mongoose": "^6.7.5",
-    "nanoid": "^3.3.4"
+    "nanoid": "^3.3.4",
+    "rimraf": "^3.0.2"
   }
 }
