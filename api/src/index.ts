@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { connect } from "./services/db";
 import { router } from "./routes";
+import { corsOptions } from "./config/corsOptions";
 
 dotenv.config()
 
@@ -20,7 +21,7 @@ const app = express();
 /**
  *  App Configuration
  */
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(router)
 
