@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import * as dotenv from "dotenv";
+import path from 'path';
 
-dotenv.config()
+dotenv.config({ path: path.resolve(__dirname, '../../etc/secrets/.env') })
 
 /**
  * Connection events
