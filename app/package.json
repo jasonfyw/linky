@@ -1,7 +1,7 @@
 {
   "name": "linky",
   "version": "0.1.0",
-  "homepage": "https://link.to",
+  "homepage": "https://lnky.to",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.13",
