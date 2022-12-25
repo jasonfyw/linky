@@ -6,7 +6,7 @@ import { router } from "./routes";
 import { corsOptions } from "./config/corsOptions";
 import path from "path";
 
-dotenv.config()
+dotenv.config({ path: path.resolve(__dirname, '../../etc/secrets/.env') })
 
 /**
  * App Variables
