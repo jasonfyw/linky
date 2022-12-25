@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { customAlphabet } from 'nanoid';
+import path from 'path';
 import { ShortLink } from '../models/ShortLink';
 
 const router = Router()
@@ -9,6 +10,12 @@ const isValidUrl = (s: string) => {
 }
 
 const generator = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 10)
+
+
+router.get('/', async (req: Request, res: Response) => {
+    res.sendFile(path.resolve(__dirname, '../../frontend_build/index.html'))
+})
+
 
 /**
  * Redirect if alias exists in database
@@ -27,6 +34,7 @@ router.get('/:id', async (req: Request, res: Response) => {
         res.status(404).send('This link does not exist')
     }
 })
+
 
 /**
  * Add a new alias url pair to that database
