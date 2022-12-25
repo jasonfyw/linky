@@ -13,7 +13,7 @@ import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
 import { ILinkPair } from "./types";
 
-const baseURL = 'http://localhost:8000'
+const baseURL = 'https://lnky.to'
 
 const api = axios.create({
     baseURL: baseURL
