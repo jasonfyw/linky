@@ -12,6 +12,7 @@ import LinkGenerator from "./components/LinkGeneratorForm"
 import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
 import { ILinkPair } from "./types";
+import ColorModeSwitcher from "./components/ColorModeSwitcher";
 
 const baseURL = 'https://lnky.to'
 
@@ -107,6 +108,7 @@ export const App = () => {
 
     return (
         <ChakraProvider theme={theme}>
+            <ColorModeSwitcher position={'fixed'} top={10} right={10} />
             <Center my={20}>
                 <VStack>
                     <Intro />
