@@ -11,13 +11,14 @@ import {
     Center,
     useToast,
     Box,
-    IconButton
+    IconButton,
+    useDisclosure
 } from '@chakra-ui/react';
 import {
     CopyIcon, DeleteIcon
 } from '@chakra-ui/icons';
-import React from 'react';
 import { useCopyToClipboard } from 'usehooks-ts';
+import { HiQrcode } from 'react-icons/hi';
 
 interface LinkCardProps {
     shortLink: string,
@@ -29,6 +30,7 @@ interface LinkCardProps {
 const LinkCard = (props: LinkCardProps) => {
     const [, copy] = useCopyToClipboard()
     const toast = useToast()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     
     const copyLink = () => {
         try {
@@ -99,6 +101,15 @@ const LinkCard = (props: LinkCardProps) => {
                         icon={<DeleteIcon />}
                         size='sm'
                         fontSize='md'
+                    />
+                    <IconButton
+                        aria-label='Get QR code'
+                        color='current'
+                        marginLeft={2}
+                        onClick={onOpen}
+                        icon={<HiQrcode />}
+                        size='sm'
+                        fontSize='xl'
                     />
                 </Center>
             </Flex>
