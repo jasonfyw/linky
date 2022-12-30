@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/icons';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { HiQrcode } from 'react-icons/hi';
+import QrCodeModal from './QrCodeModal';
 
 interface LinkCardProps {
     shortLink: string,
@@ -63,57 +64,66 @@ const LinkCard = (props: LinkCardProps) => {
     }
 
     return (
-        <Card>
-            <Flex>
-                <Box>
-                    <CardHeader pb={0} pt={2}>
-                        <Center>
-                            <Heading size={'md'}>
-                                <Link href={props.shortLink} isExternal>
-                                    {props.shortLink}
+        <>
+            <Card>
+                <Flex>
+                    <Box>
+                        <CardHeader pb={0} pt={2}>
+                            <Center>
+                                <Heading size={'md'}>
+                                    <Link href={props.shortLink} isExternal>
+                                        {props.shortLink}
+                                    </Link>
+                                </Heading>
+                            </Center>
+                        </CardHeader>
+                        <CardBody pt={2} pb={4}>
+                            <Text>
+                                <Link href={props.link} isExternal>
+                                    {props.link}
                                 </Link>
-                            </Heading>
-                        </Center>
-                    </CardHeader>
-                    <CardBody pt={2} pb={4}>
-                        <Text>
-                            <Link href={props.link} isExternal>
-                                {props.link}
-                            </Link>
-                        </Text>
-                    </CardBody>
-                </Box>
-                <Spacer/>
-                <Center mx={4}>
-                    <Button
-                        colorScheme='cyan'
-                        size={'sm'}
-                        leftIcon={<CopyIcon />}
-                        onClick={copyLink}
-                    >
-                        Copy
-                    </Button>
-                    <IconButton
-                        aria-label='Delete link'
-                        color='current'
-                        marginLeft={2}
-                        onClick={deleteLink}
-                        icon={<DeleteIcon />}
-                        size='sm'
-                        fontSize='md'
-                    />
-                    <IconButton
-                        aria-label='Get QR code'
-                        color='current'
-                        marginLeft={2}
-                        onClick={onOpen}
-                        icon={<HiQrcode />}
-                        size='sm'
-                        fontSize='xl'
-                    />
-                </Center>
-            </Flex>
-        </Card>
+                            </Text>
+                        </CardBody>
+                    </Box>
+                    <Spacer/>
+                    <Center mx={4}>
+                        <Button
+                            colorScheme='cyan'
+                            size={'sm'}
+                            leftIcon={<CopyIcon />}
+                            onClick={copyLink}
+                        >
+                            Copy
+                        </Button>
+                        <IconButton
+                            aria-label='Delete link'
+                            color='current'
+                            marginLeft={2}
+                            onClick={deleteLink}
+                            icon={<DeleteIcon />}
+                            size='sm'
+                            fontSize='md'
+                        />
+                        <IconButton
+                            aria-label='Get QR code'
+                            color='current'
+                            marginLeft={2}
+                            onClick={onOpen}
+                            icon={<HiQrcode />}
+                            size='sm'
+                            fontSize='xl'
+                        />
+                    </Center>
+                </Flex>
+            </Card>
+
+            <QrCodeModal
+                isOpen={isOpen}
+                onClose={onClose}
+                shortLink={props.shortLink}
+                link={props.link}
+            />
+        </>
     );
 }
 
