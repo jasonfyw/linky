@@ -1,5 +1,5 @@
 import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from '@chakra-ui/react';
-import React from 'react';
+import QRCode from 'react-qr-code';
 
 interface QrCodeModalProps {
     isOpen: boolean,
@@ -16,7 +16,7 @@ const QrCodeModal = (props: QrCodeModalProps) => {
                 <ModalHeader>QR Code</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    Insert qr code
+                    <QRCode value={props.shortLink} />
                 </ModalBody>
 
                 <ModalFooter>
