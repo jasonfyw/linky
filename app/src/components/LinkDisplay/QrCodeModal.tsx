@@ -1,5 +1,7 @@
 import {
+    Box,
     Button,
+    Center,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -25,7 +27,11 @@ const QrCodeModal = (props: QrCodeModalProps) => {
                 <ModalHeader>QR Code</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <QRCode value={props.shortLink} />
+                    <Center my={5}>
+                        <Box bg={'white'} p={5} borderRadius={8}>
+                            <QRCode value={props.shortLink} />
+                        </Box>
+                    </Center>
                 </ModalBody>
 
                 <ModalFooter>
