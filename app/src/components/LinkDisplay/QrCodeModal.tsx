@@ -2,13 +2,16 @@ import {
     Box,
     Button,
     Center,
+    Code,
+    Link,
     Modal,
     ModalBody,
     ModalCloseButton,
     ModalContent,
     ModalFooter,
     ModalHeader,
-    ModalOverlay
+    ModalOverlay,
+    VStack
 } from '@chakra-ui/react';
 import QRCode from 'react-qr-code';
 
@@ -27,10 +30,13 @@ const QrCodeModal = (props: QrCodeModalProps) => {
                 <ModalHeader>QR Code</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <Center my={5}>
-                        <Box bg={'white'} p={5} borderRadius={8}>
-                            <QRCode value={props.shortLink} />
-                        </Box>
+                    <Center my={2}>
+                        <VStack>
+                            <Link href={props.shortLink}><Code>{props.link}</Code></Link>
+                            <Box bg={'white'} p={5} borderRadius={8}>
+                                <QRCode value={props.shortLink} />
+                            </Box>
+                        </VStack>
                     </Center>
                 </ModalBody>
 
