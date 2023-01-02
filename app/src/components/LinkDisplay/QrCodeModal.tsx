@@ -30,9 +30,9 @@ const QrCodeModal = (props: QrCodeModalProps) => {
                 <ModalHeader>QR Code</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <Center my={2}>
+                    <Center mb={2}>
                         <VStack>
-                            <Link href={props.shortLink}><Code>{props.link}</Code></Link>
+                            <Link href={props.shortLink} mb={3}><Code>{props.link}</Code></Link>
                             <Box bg={'white'} p={5} borderRadius={8}>
                                 <QRCode value={props.shortLink} />
                             </Box>
