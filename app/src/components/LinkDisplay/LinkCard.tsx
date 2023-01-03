@@ -87,18 +87,9 @@ const LinkCard = (props: LinkCardProps) => {
                     </Box>
                     <Spacer/>
                     <Center mx={4}>
-                        <Button
-                            colorScheme='cyan'
-                            size={'sm'}
-                            leftIcon={<CopyIcon />}
-                            onClick={copyLink}
-                        >
-                            Copy
-                        </Button>
                         <IconButton
                             aria-label='Delete link'
                             color='current'
-                            marginLeft={2}
                             onClick={deleteLink}
                             icon={<DeleteIcon />}
                             size='sm'
@@ -113,6 +104,15 @@ const LinkCard = (props: LinkCardProps) => {
                             size='sm'
                             fontSize='xl'
                         />
+                        <Button
+                            colorScheme='cyan'
+                            marginLeft={2}
+                            size={'sm'}
+                            leftIcon={<CopyIcon />}
+                            onClick={copyLink}
+                        >
+                            Copy
+                        </Button>
                     </Center>
                 </Flex>
             </Card>
