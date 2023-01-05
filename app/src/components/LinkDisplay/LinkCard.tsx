@@ -20,6 +20,7 @@ import {
 import { useCopyToClipboard } from 'usehooks-ts';
 import { HiQrcode } from 'react-icons/hi';
 import QrCodeModal from './QrCodeModal';
+import { copySuccessToast, errorToast } from '../global/Toasts';
 
 interface LinkCardProps {
     shortLink: string,
@@ -38,24 +39,10 @@ const LinkCard = (props: LinkCardProps) => {
             // copy shortened link to clipboard
             copy(props.shortLink)
             // display a success toast with the copied link
-            toast({
-                title: 'Link copied to clipboard!',
-                status: 'success',
-                duration: 2000,
-                isClosable: true,
-                variant: 'subtle',
-                position: 'bottom-left'
-            })
+            copySuccessToast({ toast: toast })
         } catch (e) {
             // display an error toast
-            toast({
-                title: 'An error occurred. Please try again',
-                status: 'error',
-                duration: 2000,
-                isClosable: true,
-                variant: 'subtle',
-                position: 'bottom-left'
-            })
+            errorToast({ toast: toast })
         }
     }
 

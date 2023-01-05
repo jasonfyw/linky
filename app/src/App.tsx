@@ -13,6 +13,7 @@ import LinkDisplay from "./components/LinkDisplay";
 import Intro from "./components/Intro";
 import { ILinkPair } from "./types";
 import ColorModeSwitcher from "./components/ColorModeSwitcher";
+import { clearLinksToast, copySuccessToast, deleteLinkToast, errorToast } from "./components/global/Toasts";
 
 const baseURL = 'https://lnky.to'
 
@@ -25,6 +26,7 @@ export const App = () => {
     const [, copy] = useCopyToClipboard()
     const [links, setLinks] = useLocalStorage<ILinkPair[]>('links', [])
     const toast = useToast()
+    console.log(typeof toast)
 
     /**
      * Generates shortened link from a user-inputted URL, copies to clipboard,
@@ -53,30 +55,14 @@ export const App = () => {
             }
             setLinks(links => ([...links, newLinkPair]))
             // display a success toast with the copied link
-            toast({
-                title: 'Shortened link copied to clipboard!',
-                description: <Link href={shortLink}>{ shortLink }</Link>,
-                status: 'success',
-                duration: 9000,
-                isClosable: true,
-                variant: 'subtle',
-                position: 'bottom-left'
-            })
+            copySuccessToast({ toast: toast, desc: <Link href={shortLink}>{shortLink}</Link> })
         } catch (e) {
             // catch and extract message from error
             let message
             if (e instanceof Error) message = e.message
             else message = String(e)
             // display an error toast
-            toast({
-                title: 'An error occurred. Please try again',
-                description: message,
-                status: 'error',
-                duration: 9000,
-                isClosable: true,
-                
-                position: 'bottom-left'
-            })
+            errorToast({ toast: toast, desc: message })
         }
     }
 
@@ -84,26 +70,12 @@ export const App = () => {
         setLinks(prevLinks => {
             return prevLinks.filter(l => l.key !== v)
         })
-        toast({
-            title: 'Link deleted',
-            status: 'info',
-            duration: 2000,
-            isClosable: true,
-            variant: 'subtle',
-            position: 'bottom-left'
-        })
+        deleteLinkToast({ toast: toast })
     }
 
     const clearHistory = () => {
         setLinks([])
-        toast({
-            title: 'All links cleared',
-            status: 'info',
-            duration: 2000,
-            isClosable: true,
-            variant: 'subtle',
-            position: 'bottom-left'
-        })
+        clearLinksToast({ toast: toast })
     }
 
     return (
